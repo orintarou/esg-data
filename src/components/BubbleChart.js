@@ -12,7 +12,7 @@ function chart(data, {
   width = width, // outer width, in pixels
   height = width/(1.5), // outer height, in pixels
   background = background,
-  padding = 3, // padding between circles
+  padding = 10, // padding between circles
   margin = 1, // default margins
   marginTop = margin, // top margin, in pixels
   marginRight = margin, // right margin, in pixels
@@ -102,7 +102,7 @@ function chart(data, {
       .attr("fill", G ? d => color(G[d.data]) : fill == null ? "none" : fill)
       .attr("fill-opacity", fillOpacity)
       .attr("r", d => d.r)
-      .attr("class", "opacity-[.75] stroke-black hover:stroke-2 hover:stroke-red-700")
+      .attr("class", "opacity-[.75] stroke-black hover:scale-110 hover:stroke-2 hover:stroke-red-700")
   
 
 
