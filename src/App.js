@@ -39,39 +39,20 @@ class App extends Component {
 	}
 
 	welcome(p) {
-		for(var i=0;i<4;i++){
-			// myTab = (i === 0) ? '#tabOne' :
-			// 		(i === 1) ? '#tabOne' :
-			// 		(i === 2) ? '#tabOne' :
-			// 		(i === 3) ? '#tabOne' :
-		}
-		if(p === 'V1'){
-			document.querySelector('#tabOne').classList.replace('bg-white', 'bg-black');
-			document.querySelector('#tabTwo').classList.replace('bg-black', 'bg-white');
-			document.querySelector('#tabThree').classList.replace('bg-black', 'bg-white');
-			document.querySelector('#tabFour').classList.replace('bg-black', 'bg-white');
-			return <AppSelect data={data} version={this.state.tab} />;		
-		}else if(p === 'V2'){
-			if(document.querySelector('#tabOne')){
-				document.querySelector('#tabOne').classList.replace('bg-black', 'bg-white');
-				document.querySelector('#tabTwo').classList.replace('bg-white', 'bg-black');
-				document.querySelector('#tabThree').classList.replace('bg-black', 'bg-white');
-				document.querySelector('#tabFour').classList.replace('bg-black', 'bg-white');
+		if(document.querySelector('#tabOne')){
+			for(var i=0;i<4;i++){
+				let myTab = (i === 0) ? '#tabOne' :
+						(i === 1) ? '#tabTwo' :
+						(i === 2) ? '#tabThree' :
+						'#tabFour';
+				if(p === ('V' + (i+1))){
+					document.querySelector(myTab).classList.replace('bg-white', 'bg-black');
+				}else{
+					document.querySelector(myTab).classList.replace('bg-black', 'bg-white');
+				}
 			}
-			return <AppSelect data={data} version={this.state.tab}/>
-		}else if(p === 'V3'){
-			document.querySelector('#tabOne').classList.replace('bg-black', 'bg-white');
-			document.querySelector('#tabTwo').classList.replace('bg-black', 'bg-white');
-			document.querySelector('#tabThree').classList.replace('bg-white', 'bg-black');
-			document.querySelector('#tabFour').classList.replace('bg-black', 'bg-white');
-			return <AppSelect data={data} version={this.state.tab}/>
-		}else if(p === 'V4'){
-			document.querySelector('#tabOne').classList.replace('bg-black', 'bg-white');
-			document.querySelector('#tabTwo').classList.replace('bg-black', 'bg-white');
-			document.querySelector('#tabThree').classList.replace('bg-black', 'bg-white');
-			document.querySelector('#tabFour').classList.replace('bg-white', 'bg-black');
-			return <AppSelect data={data} version={this.state.tab}/>
 		}
+		return <AppSelect data={data} version={this.state.tab}/>
 	}
 	render(){
 	  var myTab = this.state.tab;
