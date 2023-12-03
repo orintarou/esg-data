@@ -5,8 +5,7 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 
 const data = {
-	name: 'Eve',
-	value: 50,
+	name: 'Full',
 	children:  
   	[
 	    {id: 0, name: "Sandbox",value:50},
@@ -40,6 +39,12 @@ class App extends Component {
 	}
 
 	welcome(p) {
+		for(var i=0;i<4;i++){
+			// myTab = (i === 0) ? '#tabOne' :
+			// 		(i === 1) ? '#tabOne' :
+			// 		(i === 2) ? '#tabOne' :
+			// 		(i === 3) ? '#tabOne' :
+		}
 		if(p === 'V1'){
 			document.querySelector('#tabOne').classList.replace('bg-white', 'bg-black');
 			document.querySelector('#tabTwo').classList.replace('bg-black', 'bg-white');
