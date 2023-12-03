@@ -79,9 +79,11 @@ function chart(data, {
     (d3.hierarchy({children: I})
       .sum(i => V[i]));
 
+  let myBackground = (background === 1)? red: green;
   const svg = d3.select("#bubble")
         .append("svg")
-        .attr("class", 'w-1/2 ' + 'text-[10px] ')
+        .attr('id', 'bubbleChart')
+        .attr("class", 'w-1/2 ' + "text-[10px] h-[100vh] bg-cover" + myBackground)
         .attr("viewBox", [-marginLeft, -marginTop, width, height])
         .attr("text-anchor", "middle");
 
@@ -133,9 +135,19 @@ class AppV1 extends Component {
 		this.state = {
 			data: this.props.data,
       version: this.props.version,
-      renderNum:0
+      renderNum:0,
+      background:1
 		}
+    this.changeBackground = this.changeBackground.bind(this);
 	}
+
+  changeBackground(){
+       if(document.querySelector('#bubbleChart').classList[3] === "bg-none"){
+        document.querySelector('#bubbleChart').classList.replace("bg-none", "bg-[url('./bg.png')]");
+       }else{
+         document.querySelector('#bubbleChart').classList.replace("bg-[url('./bg.png')]", "bg-none");
+       }
+  }
 
 	componentDidMount(){
     //const files = this.state.data.filter(d => d.value !==null)
@@ -167,12 +179,16 @@ class AppV1 extends Component {
         value: d => d.value,
         group: d => d.name.split(".")[1],
         title: d => `${d.name}\n${d.value.toLocaleString("en")}`,
-        width: window.innerWidth/2, 
+        width: window.innerWidth/2,
+        background: this.state.background 
       })
     }
 	  return (
-	      <div id="bubble">
+      <div>
+        <a onClick={this.changeBackground} className="bg-[url('./icon.svg')] w-[40px] h-[40px] bg-contain fixed top-[5%] left-[5%]"></a>
+	      <div id="bubble">    
 	      </div>
+      </div>
 	  );
 	}
 }
