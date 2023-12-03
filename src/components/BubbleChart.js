@@ -11,6 +11,7 @@ function chart(data, {
   linkTarget = "_blank", // the target attribute for links, if any
   width = width, // outer width, in pixels
   height = width/(1.5), // outer height, in pixels
+  background = background,
   padding = 3, // padding between circles
   margin = 1, // default margins
   marginTop = margin, // top margin, in pixels
@@ -79,11 +80,13 @@ function chart(data, {
     (d3.hierarchy({children: I})
       .sum(i => V[i]));
 
-  let myBackground = (background === 1)? red: green;
+  let myBackground = (background === 0) ? 'bg-none': "bg-[url('./bg.png')] bg-cover";
+
+
   const svg = d3.select("#bubble")
         .append("svg")
         .attr('id', 'bubbleChart')
-        .attr("class", 'w-1/2 ' + "text-[10px] h-[100vh] bg-cover" + myBackground)
+        .attr("class", 'w-1/2 ' + "text-[10px] h-[100vh] " + myBackground)
         .attr("viewBox", [-marginLeft, -marginTop, width, height])
         .attr("text-anchor", "middle");
 
@@ -144,8 +147,14 @@ class AppV1 extends Component {
   changeBackground(){
        if(document.querySelector('#bubbleChart').classList[3] === "bg-none"){
         document.querySelector('#bubbleChart').classList.replace("bg-none", "bg-[url('./bg.png')]");
+        this.setState({
+          background:1,
+        })
        }else{
          document.querySelector('#bubbleChart').classList.replace("bg-[url('./bg.png')]", "bg-none");
+         this.setState({
+          background:0,
+         })
        }
   }
 
@@ -157,6 +166,7 @@ class AppV1 extends Component {
       group: d => d.name.split(".")[1],
       title: d => `${d.name}\n${d.value.toLocaleString("en")}`,
       width: window.innerWidth/2, 
+      background: this.state.background
     })
 		this.setState({
 			data: chartResults[1],
@@ -185,7 +195,7 @@ class AppV1 extends Component {
     }
 	  return (
       <div>
-        <a onClick={this.changeBackground} className="bg-[url('./icon.svg')] w-[40px] h-[40px] bg-contain fixed top-[5%] left-[5%]"></a>
+        <a onClick={this.changeBackground} className="hover:opacity-[.75] bg-[url('./icon.svg')] w-[40px] h-[40px] bg-contain fixed top-[5%] left-[5%]"></a>
 	      <div id="bubble">    
 	      </div>
       </div>
