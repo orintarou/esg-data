@@ -115,7 +115,7 @@ class AlterTable extends Component {
       return (
         <div className="fixed right-[0%] top-[20%] w-2/4 pl-[10%] text-black">
           {this.state.data.map((item, index) => {
-            return <ul key={index} className="hover:bg-zinc-300">{item.data.name}</ul>;
+            return <ul key={index} className="hover:bg-zinc-300 w-fit">{item.data.name}</ul>;
           })}
         </div>
       );

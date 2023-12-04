@@ -159,14 +159,6 @@ class AppV1 extends Component {
       '';
       
       if(this.state.renderNum > 0){
-        // var chartResults = chart(this.props.data.children, {
-        //   label: d => [...d.name.split(".").pop().split(/(?=[A-Z][a-z])/g), d.value.toLocaleString("en")].join("\n"),
-        //   value: d => d.value,
-        //   group: d => d.name.split(".")[1],
-        //   title: d => `${d.name}\n${d.value.toLocaleString("en")}`,
-        //   width: window.innerWidth/2,
-        //   background: this.state.background 
-        // })
 
         chartTwo(this.props.data, {
         value: d=> d.value,
