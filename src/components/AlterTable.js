@@ -113,9 +113,9 @@ class AlterTable extends Component {
   render() {
     if (this.props.version === "V2") {
       return (
-        <div className="fixed right-[0%] top-[20%] w-2/4 pl-[10%] text-black">
+        <div className="fixed right-[0%] top-[10%] w-2/4 pl-[10%] text-black">
           {this.state.data.map((item, index) => {
-            return <ul key={index} className="hover:bg-zinc-300 w-fit">{item.data.name}</ul>;
+            return <ul key={index} className="rounded-lg p-[5px] mt-[10px] bg-[#F5F4F4] w-fit">{item.data.name}</ul>;
           })}
         </div>
       );
@@ -126,7 +126,7 @@ class AlterTable extends Component {
             return (
               <div>
                 <span className="text-green-300">{item.data.value}</span>
-                <li key={index} className="rounded-lg border-black border-2 list-none mb-4 min-w-fit w-[40%] hover:bg-zinc-300">
+                <li key={index} className="rounded-lg border-black border-2 list-none mb-4 min-w-fit w-[40%] bg-[#F5F4F4] p-[10px]">
                   <span>{item.data.name}</span>
                   <span
                     onClick={(e) => this.handleClick(item, "minus")}
@@ -171,7 +171,7 @@ class AlterTable extends Component {
             return (
               <div  className="">
                 <span className="text-green-300">{item.data.value}</span>
-                <li key={index} className="rounded-lg border-black border-2 list-none mb-4 min-w-fit w-[40%] hover:bg-zinc-300">
+                <li key={index} className="rounded-lg border-black border-2 list-none mb-4 min-w-fit w-[40%] bg-[#F5F4F4]">
                   <span
                     onClick={(e) => this.handleDelete(item)}
                     className=" hover:font-bold text-red-700 ml-[10px] mr-[10px]"
