@@ -170,8 +170,8 @@ class AlterTable extends Component {
           {this.state.data.map((item, index) => {
             return (
               <div  className="">
-                <span className="text-green-300">{item.data.value}</span>
-                <li key={index} className="border-2 rounded-lg list-none mb-4 w-max w-[40%] bg-[#F5F4F4]">
+                <span className="text-[10px] text-green-300">{item.data.value}</span>
+                <li key={index} className="border-2 rounded-lg list-none w-max w-[40%] bg-[#F5F4F4]">
                   <span
                     onClick={(e) => this.handleDelete(item)}
                     className=" hover:font-bold text-red-700 ml-[10px] mr-[10px]"
