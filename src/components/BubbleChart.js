@@ -98,7 +98,7 @@ function chartTwo(data, {
         .attr('r', d => d.r)
         .attr("dy", ".3em")
         .style("text-anchor", "middle")
-        .attr("class", 'text-[16px]')
+        .attr("class", 'text-[6px]')
         .text(d => {return (d.parent === null || d.children) ? '' : (d.data.name + ' ' + d.data.value)});
   };
 }
