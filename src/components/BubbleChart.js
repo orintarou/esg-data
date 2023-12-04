@@ -58,7 +58,7 @@ function chartTwo(data, {
     .attr('width', diameter)
     .attr('height', '100vh')
     .attr('id', "bubbleChart")
-    .attr("class", myBackground + ' w-1/2 ' + 'text-[10px]')
+    .attr("class", myBackground + ' w-1/2 ' + 'text-[6px] xs:text-[4px] sm:text-[6px] md:text-[8px] lg:text-[8px] ')
     .attr("viewBox", [-marginLeft, -marginTop, width, height]);
 
   var bubble = d3.pack(data)
@@ -98,7 +98,7 @@ function chartTwo(data, {
         .attr('r', d => d.r)
         .attr("dy", ".3em")
         .style("text-anchor", "middle")
-        .attr("class", 'text-[6px]')
+        .attr("class", '')
         .text(d => {return (d.parent === null || d.children) ? '' : (d.data.name + ' ' + d.data.value)});
   };
 }
