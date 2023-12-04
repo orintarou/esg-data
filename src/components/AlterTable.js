@@ -113,20 +113,20 @@ class AlterTable extends Component {
   render() {
     if (this.props.version === "V2") {
       return (
-        <div className="fixed right-[0%] top-[10%] w-2/4 pl-[10%] text-black">
+        <div className="fixed right-[10%] top-[10%] w-2/4 pl-[10%] text-black">
           {this.state.data.map((item, index) => {
-            return <ul key={index} className="rounded-lg p-[5px] mt-[10px] bg-[#F5F4F4] w-fit">{item.data.name}</ul>;
+            return <ul key={index} className="rounded-lg p-[5px] mt-[5px] bg-[#F5F4F4] w-fit">{item.data.name}</ul>;
           })}
         </div>
       );
     } else if (this.props.version === "V3") {
       return (
-        <div className="fixed h-[80vh] overflow-y-scroll right-[0%] top-[5%] w-2/4 pl-[10%] text-black">
+        <div className="fixed h-[80vh] overflow-y-scroll right-[10%] top-[5%] w-2/4 pl-[10%] text-black">
           {this.state.data.map((item, index) => {
             return (
               <div>
                 <span className="text-green-300">{item.data.value}</span>
-                <li key={index} className="rounded-lg border-black border-2 list-none mb-4 min-w-fit w-[40%] bg-[#F5F4F4] p-[10px]">
+                <li key={index} className="rounded-lg border-black border-2 p-[2px] list-none mb-4 min-w-fit w-[40%] bg-[#F5F4F4]">
                   <span>{item.data.name}</span>
                   <span
                     onClick={(e) => this.handleClick(item, "minus")}
@@ -148,7 +148,7 @@ class AlterTable extends Component {
       );
     }
     return (
-      <div className="fixed h-[80vh] overflow-y-scroll right-[0%] top-[5%] w-2/4 pl-[5%] text-black">
+      <div className="fixed h-[80vh] overflow-y-scroll right-[5%] top-[5%] w-2/4 pl-[5%] text-black">
         <span className="bg-[url('./scroll.png')] w-[40px] h-[40px] bg-contain fixed bottom-[6%] left-[75%]"></span>
         <form
           className="fixed w-[100%]"
