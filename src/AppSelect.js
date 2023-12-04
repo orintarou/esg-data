@@ -7,7 +7,6 @@ import * as d3 from 'd3';
 
 
 
-
 function RenderAlterTable({version, handleAddition, handleDelete, handler, data}){
 		let conditionalTable = (version !== 'V1') ? 
 			(<AlterTable version={version} handleAddition={handleAddition} handleDeleteItem={handleDelete} handler={handler} data={data}/>) :

@@ -12,7 +12,7 @@ function chartTwo(data, {
   value = ([, y]) => y,
   padding = 10, // padding between circles
   margin = 1, // default margins
-  marginTop = margin, // top margin, in pixels
+  marginTop = 100, // top margin, in pixels
   marginRight = margin, // right margin, in pixels
   marginBottom = margin, // bottom margin, in pixels
   marginLeft = margin,
@@ -21,7 +21,7 @@ function chartTwo(data, {
 
   document.querySelector('.chart').innerHTML = '';
 
-  var diameter = width/1.5;
+  var diameter = width/2;
 
   let myBackground = (background === 1) ? "bg-[url('./bg.png')] bg-cover" :'bg-none';
   
@@ -58,7 +58,7 @@ function chartTwo(data, {
     .attr('width', diameter)
     .attr('height', '100vh')
     .attr('id', "bubbleChart")
-    .attr("class", myBackground + ' w-1/2 ' + 'text-[6px] xs:text-[4px] sm:text-[6px] md:text-[12px] lg:text-[12px] ')
+    .attr("class", myBackground + ' w-[100%] ' + 'text-[6px] xs:text-[4px] sm:text-[6px] md:text-[12px] lg:text-[12px] ')
     .attr("viewBox", [-marginLeft, -marginTop, width, height]);
 
   var bubble = d3.pack(data)
@@ -82,7 +82,7 @@ function chartTwo(data, {
         .attr('transform', d => 'translate(' + [d.x, d.y] + ')')
         .attr('r', d => d.r)
         .attr('name', d=> d.data.name)
-        .attr('class', 'stroke-[1px] fill-[#9DB4CC] hover:stroke-2 hover:stroke-red-700')
+        .attr('class', 'stroke-[1px] opacity-[.8] fill-[#9DB4CC] hover:opacity-[1] hover:stroke-[4px] hover:stroke-red-700')
         .attr('stroke', d=> {return 'black'})
         .attr('display', d=> {return (d.parent === null) ? 'none' : ''})
         .on('mouseover', d => showTooltip(d, d.target['__data__'].data.name))
@@ -121,6 +121,7 @@ class AppV1 extends Component {
           document.getElementById('tooltip').remove();
         }
        if(document.querySelector('#bubbleChart').classList[0] === "bg-none"){
+
         document.querySelector('#bubbleChart').classList.replace("bg-none", "bg-[url('./bg.png')]");
        }else{
          document.querySelector('#bubbleChart').classList.replace("bg-[url('./bg.png')]", "bg-none");
