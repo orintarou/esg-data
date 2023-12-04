@@ -52,7 +52,19 @@ class AlterTable extends Component {
   handleDelete(item) {
     var newData = this.state.data;
     var myResults = [];
+    console.log(item.data.children);
+    if(item.data.children && item.data.children.length > 0){
+      alert("your bubble has children - please remove your bubble's children before ability to close Intra organization out presents itself");
+      return;
+    }
     for (var i in newData) {
+      if(newData[i].children){
+        for(var j in newData[i].children){
+          if(newData[i].children[j].data.id === item.data.id){
+            delete newData[i].children[j];
+          }
+        }
+      }
       if (newData[i].data.id === item.data.id) {
         delete newData[i];
       }

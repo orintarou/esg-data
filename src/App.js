@@ -8,15 +8,15 @@ const data = {
 	name: 'Full',
 	children:  
   	[
-	    {id: 0, name: "Sandbox",value:50},
-	    {id: 1,name: "Intra-Organziation", value:100, children:
+	    {id: 0, name: "Sandbox",value:100},
+	    {id: 1,name: "Intra-Organziation", value:200, children:
 	    [
-	    	{id:6, name:"Six", value:100},
-	    	{id:7, name:"Seven", value:100},
-	    	{id:8, name:"Eight", value:100},
+	    	{id:6, name:"Structure", value:120},
+	    	{id:7, name:"Operation", value:120},
+	    	{id:8, name:"Core Values", value:100},
 	    ]},
-	    {id: 2,name: "Community Development", value:100},
-	    {id: 3,name: "ESG Fellowship", value:100},
+	    {id: 2,name: "Community Development", value:200},
+	    {id: 3,name: "ESG Fellowship", value:200},
 	    {id: 4,name: "Software", value:200},
 	    {id: 5,name: "Business Model Strategy", value:100},
     ]
