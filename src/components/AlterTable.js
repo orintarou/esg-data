@@ -54,7 +54,7 @@ class AlterTable extends Component {
     var myResults = [];
     console.log(item.data.children);
     if(item.data.children && item.data.children.length > 0){
-      alert("your bubble has children - please remove your bubble's children before ability to close Intra organization out presents itself");
+      alert("Intra Organization out presents itself");
       return;
     }
     for (var i in newData) {

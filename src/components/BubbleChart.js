@@ -118,7 +118,9 @@ class AppV1 extends Component {
 	}
 
   changeBackground(){
-       document.getElementById('tooltip').remove();
+       if(document.getElementById('tooltip')){
+          document.getElementById('tooltip').remove();
+        }
        if(document.querySelector('#bubbleChart').classList[0] === "bg-none"){
         document.querySelector('#bubbleChart').classList.replace("bg-none", "bg-[url('./bg.png')]");
        }else{
