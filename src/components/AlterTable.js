@@ -159,12 +159,12 @@ class AlterTable extends Component {
             name="name"
             value={this.state.value}
             placeholder="Add Bubble..."
-            class="bg-[#F5F4F4] mt-[10px] text-center w-[40%]"
+            class="bg-[#F5F4F4] mt-[10px] text-center rounded-lg border-2 border-black w-[40%] placeholder:text-black"
             onChange={this.handleDOMElement}
           ></input>
           <input value="+" type="submit" />
         </form>
-
+        <br/>
         <hr class="h-[2px] w-[40%] my-8 bg-gray-200 border-0 dark:bg-gray-700" />
         <ul className="mt-[-4%]">
           {this.state.data.map((item, index) => {

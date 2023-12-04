@@ -111,7 +111,7 @@ class AppV1 extends Component {
 			data: this.props.data,
       version: this.props.version,
       renderNum:0,
-      background:1,
+      background:0,
 		}
     this.changeBackground = this.changeBackground.bind(this);
 	}
@@ -133,15 +133,6 @@ class AppV1 extends Component {
   }
 
 	componentDidMount(){
-    //const files = this.state.data.filter(d => d.value !==null)
-		// var chartResults = chart(this.props.data.children, {
-  //     label: d => [...d.name.split(".").pop().split(/(?=[A-Z][a-z])/g), d.value.toLocaleString("en")].join("\n"),
-  //     value: d => d.value,
-  //     group: d => d.name.split(".")[1],
-  //     title: d => `${d.name}\n${d.value.toLocaleString("en")}`,
-  //     width: window.innerWidth/2, 
-  //     background: this.state.background
-  //   })
 
     chartTwo(this.props.data, {
       value: d=> d.value,
@@ -184,7 +175,7 @@ class AppV1 extends Component {
     }
 	  return (
       <div>
-        <a onClick={this.changeBackground} className="hover:opacity-[.75] bg-[url('./icon.svg')] w-[40px] h-[40px] bg-contain fixed top-[5%] left-[5%]"></a>
+        <button onClick={this.changeBackground} className="hover:opacity-[.75] bg-[url('./icon.png')] w-[40px] h-[40px] bg-contain fixed top-[5%] left-[5%]"></button>
 	      <div class="chart"></div>
         <div id="bubble">    
 	      </div>
