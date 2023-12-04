@@ -37,7 +37,8 @@ function chartTwo(data, {
       .html("<span class='text-black'>" + title + "</span>\n\n" + "<span class='text-green-700'>Green</span>\n<span class='text-red-700'>Red</span>\n<span class='text-blue-700'>Blue</span>\n<span class='text-purple-700'>Purple</span>\n<span class='text-yellow-700'>Yellow</span>")
       .style("left", (d.x) + "px")
       .style("top", (d.y) + "px")
-      .attr("class", "bg-white p-2.5 border-2 border-black absolute w-[100px] text-[10px] z-40")
+      .attr("id", 'tooltip')
+      .attr("class", "tooltip bg-white p-2.5 border-2 border-black absolute w-[100px] text-[10px] z-40")
   }
 
   var moveTooltip = function(d) {
@@ -50,7 +51,7 @@ function chartTwo(data, {
     tooltip
       .transition()
       .duration(200)
-      .style("opacity", 1.5)
+      .style("opacity", 1)
   }
 
 
@@ -117,6 +118,7 @@ class AppV1 extends Component {
 	}
 
   changeBackground(){
+       document.getElementById('tooltip').remove();
        if(document.querySelector('#bubbleChart').classList[0] === "bg-none"){
         document.querySelector('#bubbleChart').classList.replace("bg-none", "bg-[url('./bg.png')]");
        }else{
@@ -152,6 +154,9 @@ class AppV1 extends Component {
 
 
 	render(){
+    if(document.getElementById('tooltip')){
+      document.getElementById('tooltip').remove();
+    }
 	const myNewData = this.state.data;
   const versionClass = (this.state.version === 1) ?
     'fixed left-[10%]':
