@@ -113,7 +113,7 @@ class AlterTable extends Component {
   render() {
     if (this.props.version === "V2") {
       return (
-        <div className="fixed right-[10%] top-[10%] w-2/4 pl-[10%] text-black">
+        <div className="fixed right-[5%] top-[17%] w-2/4 pl-[10%] text-black">
           {this.state.data.map((item, index) => {
             return <ul key={index} className="rounded-lg p-[5px] mt-[5px] bg-[#F5F4F4] w-fit">{item.data.name}</ul>;
           })}
@@ -121,12 +121,12 @@ class AlterTable extends Component {
       );
     } else if (this.props.version === "V3") {
       return (
-        <div className="fixed h-[80vh] overflow-y-scroll right-[10%] top-[5%] w-2/4 pl-[10%] text-black">
+        <div className="fixed h-[80vh] overflow-y-scroll right-[5%] top-[10%] w-2/4 pl-[10%] text-black">
           {this.state.data.map((item, index) => {
             return (
               <div>
-                <span className="text-green-300">{item.data.value}</span>
-                <li key={index} className="rounded-lg border-black border-2 p-[2px] list-none mb-4 min-w-fit w-[40%] bg-[#F5F4F4]">
+                <span className="text-[10px] text-green-300">{item.data.value}</span>
+                <li key={index} className="rounded-lg border-2 p-[-2px] list-none w-max w-[40%] bg-[#F5F4F4]">
                   <span>{item.data.name}</span>
                   <span
                     onClick={(e) => this.handleClick(item, "minus")}
@@ -148,7 +148,7 @@ class AlterTable extends Component {
       );
     }
     return (
-      <div className="fixed h-[80vh] overflow-y-scroll right-[5%] top-[5%] w-2/4 pl-[5%] text-black">
+      <div className="fixed h-[80vh] overflow-y-scroll right-[5%] top-[10%] w-2/4 pl-[5%] text-black">
         <span className="bg-[url('./scroll.png')] w-[40px] h-[40px] bg-contain fixed bottom-[6%] left-[75%]"></span>
         <form
           className="fixed w-[100%]"
@@ -159,19 +159,19 @@ class AlterTable extends Component {
             name="name"
             value={this.state.value}
             placeholder="Add Bubble..."
-            class="bg-[#F5F4F4] mt-[10px] text-center rounded-lg border-2 border-black w-[40%] placeholder:text-black"
+            class="bg-[#F5F4F4] mt-[0px] text-center rounded-lg border-2 w-[40%] placeholder:text-black"
             onChange={this.handleDOMElement}
           ></input>
           <input value="+" type="submit" />
         </form>
         <br/>
-        <hr class="h-[2px] w-[40%] my-8 bg-gray-200 border-0 dark:bg-gray-700" />
-        <ul className="mt-[-4%]">
+        <div class="h-[2px] w-[0%] my-8 bg-[#F5F4F4] border-0" />
+        <ul className="mt-[-12%]">
           {this.state.data.map((item, index) => {
             return (
               <div  className="">
                 <span className="text-green-300">{item.data.value}</span>
-                <li key={index} className="rounded-lg border-black border-2 list-none mb-4 min-w-fit w-[40%] bg-[#F5F4F4]">
+                <li key={index} className="border-2 rounded-lg list-none mb-4 w-max w-[40%] bg-[#F5F4F4]">
                   <span
                     onClick={(e) => this.handleDelete(item)}
                     className=" hover:font-bold text-red-700 ml-[10px] mr-[10px]"
