@@ -126,7 +126,7 @@ class AlterTable extends Component {
             return (
               <div>
                 <span className="text-[10px] text-green-300">{item.data.value}</span>
-                <li key={index} className="rounded-lg border-2 border-black p-[14px] list-none w-max w-[40%] bg-[#F5F4F4]">
+                <li key={index} className="rounded-lg border-2 border-black p-[-2px] list-none w-max w-[40%] bg-[#F5F4F4]">
                   <span>{item.data.name}</span>
                   <span
                     onClick={(e) => this.handleClick(item, "minus")}
@@ -171,7 +171,7 @@ class AlterTable extends Component {
             return (
               <div  className="">
                 <span className="text-[10px] text-green-300">{item.data.value}</span>
-                <li key={index} className="border-2 border-black rounded-lg list-none w-max p-[14px] w-[40%] bg-[#F5F4F4]">
+                <li key={index} className="border-2 border-black rounded-lg list-none w-max w-[40%] bg-[#F5F4F4]">
                   <span
                     onClick={(e) => this.handleDelete(item)}
                     className=" hover:font-bold text-red-700 ml-[10px] mr-[10px]"
