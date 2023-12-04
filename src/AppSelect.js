@@ -52,7 +52,7 @@ class AppSelect extends Component {
 
 	handleDelete(id){
 		var newData = this.state.data;
-		console.log(newData);
+
 		for(var i in newData.children){
 			if(newData.children[i].children) {
 				for(var j in newData.children[i].children){

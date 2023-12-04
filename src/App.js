@@ -77,7 +77,7 @@ class App extends Component {
 		      					(i === 1) ? 'Two' :
 		      					(i === 2) ? 'Three' :
 		      					'Four';
-		      			return (<li id={'tab' + myTabNumber} onClick={(e) => this.handleClick(e)} className="float-left block rounded-lg text-[#19be87] text-center m-1.5 px-0.5">
+		      			return (<li key={i} id={'tab' + myTabNumber} onClick={(e) => this.handleClick(e)} className="float-left block rounded-lg text-[#19be87] text-center m-1.5 px-0.5">
 		      			{'V'+ (i+1)}
 		      			</li>)
 		      		})

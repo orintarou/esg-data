@@ -19,7 +19,6 @@ function chartTwo(data, {
   background = background
 }){
 
-  console.log('---');
   document.querySelector('.chart').innerHTML = '';
 
   var diameter = width/1.5;
@@ -159,27 +158,28 @@ class AppV1 extends Component {
     if(document.getElementById('tooltip')){
       document.getElementById('tooltip').remove();
     }
-	const myNewData = this.state.data;
-  const versionClass = (this.state.version === 1) ?
-    'fixed left-[10%]':
-    (this.state.version === 2) ?
-    '':
-    '';
     
-    if(this.state.renderNum > 0){
-      // var chartResults = chart(this.props.data.children, {
-      //   label: d => [...d.name.split(".").pop().split(/(?=[A-Z][a-z])/g), d.value.toLocaleString("en")].join("\n"),
-      //   value: d => d.value,
-      //   group: d => d.name.split(".")[1],
-      //   title: d => `${d.name}\n${d.value.toLocaleString("en")}`,
-      //   width: window.innerWidth/2,
-      //   background: this.state.background 
-      // })
+  	const myNewData = this.state.data;
+    const versionClass = (this.state.version === 1) ?
+      'fixed left-[10%]':
+      (this.state.version === 2) ?
+      '':
+      '';
+      
+      if(this.state.renderNum > 0){
+        // var chartResults = chart(this.props.data.children, {
+        //   label: d => [...d.name.split(".").pop().split(/(?=[A-Z][a-z])/g), d.value.toLocaleString("en")].join("\n"),
+        //   value: d => d.value,
+        //   group: d => d.name.split(".")[1],
+        //   title: d => `${d.name}\n${d.value.toLocaleString("en")}`,
+        //   width: window.innerWidth/2,
+        //   background: this.state.background 
+        // })
 
-      chartTwo(this.props.data, {
-      value: d=> d.value,
-      background: this.state.background
-    });
+        chartTwo(this.props.data, {
+        value: d=> d.value,
+        background: this.state.background
+      });
     }
 	  return (
       <div>

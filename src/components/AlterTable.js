@@ -52,7 +52,7 @@ class AlterTable extends Component {
   handleDelete(item) {
     var newData = this.state.data;
     var myResults = [];
-    console.log(item.data.children);
+
     if(item.data.children && item.data.children.length > 0){
       alert("Intra Organization out presents itself");
       return;
@@ -114,19 +114,19 @@ class AlterTable extends Component {
     if (this.props.version === "V2") {
       return (
         <div className="fixed right-[0%] top-[20%] w-2/4 pl-[10%] text-black">
-          {this.state.data.map((item) => {
-            return <ul className="hover:bg-zinc-300">{item.data.name}</ul>;
+          {this.state.data.map((item, index) => {
+            return <ul key={index} className="hover:bg-zinc-300">{item.data.name}</ul>;
           })}
         </div>
       );
     } else if (this.props.version === "V3") {
       return (
         <div className="fixed h-[80vh] overflow-y-scroll right-[0%] top-[5%] w-2/4 pl-[10%] text-black">
-          {this.state.data.map((item) => {
+          {this.state.data.map((item, index) => {
             return (
               <div>
                 <span className="text-green-300">{item.data.value}</span>
-                <li className="rounded-lg border-black border-2 list-none mb-4 min-w-fit w-[40%] hover:bg-zinc-300">
+                <li key={index} className="rounded-lg border-black border-2 list-none mb-4 min-w-fit w-[40%] hover:bg-zinc-300">
                   <span>{item.data.name}</span>
                   <span
                     onClick={(e) => this.handleClick(item, "minus")}
@@ -167,11 +167,11 @@ class AlterTable extends Component {
 
         <hr class="h-[2px] w-[40%] my-8 bg-gray-200 border-0 dark:bg-gray-700" />
         <ul className="mt-[-4%]">
-          {this.state.data.map((item) => {
+          {this.state.data.map((item, index) => {
             return (
-              <div className="">
+              <div  className="">
                 <span className="text-green-300">{item.data.value}</span>
-                <li className="rounded-lg border-black border-2 list-none mb-4 min-w-fit w-[40%] hover:bg-zinc-300">
+                <li key={index} className="rounded-lg border-black border-2 list-none mb-4 min-w-fit w-[40%] hover:bg-zinc-300">
                   <span
                     onClick={(e) => this.handleDelete(item)}
                     className=" hover:font-bold text-red-700 ml-[10px] mr-[10px]"
