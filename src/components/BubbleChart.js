@@ -58,7 +58,7 @@ function chartTwo(data, {
     .attr('width', diameter)
     .attr('height', '100vh')
     .attr('id', "bubbleChart")
-    .attr("class", myBackground + ' w-[100%] ' + 'max-[500px]:mt-[-15vh] text-[6px] mt-[0%] xs:text-[4px] sm:text-[6px] md:text-[12px] lg:text-[12px] ')
+    .attr("class", myBackground + ' w-[100%] ' + 'max-[500px]:pb-[100px] text-[6px] mt-[0%] xs:text-[4px] sm:text-[6px] md:text-[12px] lg:text-[12px] ')
     .attr("viewBox", [-marginLeft, -marginTop, width, height]);
 
   var bubble = d3.pack(data)

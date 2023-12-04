@@ -159,7 +159,7 @@ class AlterTable extends Component {
             name="name"
             value={this.state.value}
             placeholder="Add Bubble..."
-            class="bg-[#F5F4F4] mt-[0px] text-center rounded-lg border-2 w-[40%] placeholder:text-black"
+            class="bg-[#F5F4F4] mt-[0px] text-center rounded-lg border-2 border-black w-[40%] placeholder:text-black"
             onChange={this.handleDOMElement}
           ></input>
           <input value="+" type="submit" />
