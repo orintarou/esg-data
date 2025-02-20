@@ -34,6 +34,7 @@ function chartTwo(data, {
       .duration(200)
     tooltip
       .html("<span class='text-black'>" + title + "</span>\n\n" + "<span class='text-green-700'>Green</span>\n<span class='text-red-700'>Red</span>\n<span class='text-blue-700'>Blue</span>\n<span class='text-purple-700'>Purple</span>\n<span class='text-yellow-700'>Yellow</span>")
+      .style("display", "")
       .style("left", (d.x) + "px")
       .style("top", (d.y) + "px")
       .attr("id", 'tooltip')
@@ -48,9 +49,7 @@ function chartTwo(data, {
 
   var hideTooltip = function(d) {
     tooltip
-      .transition()
-      .duration(200)
-      .style("opacity", 1)
+      .style("display", 'none')
   }
 
 
