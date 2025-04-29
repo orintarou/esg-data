@@ -1,40 +1,44 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
+//data clean
+// function chartTwo(
+// }
 
-const chart = (data) => {
-  // Specify the dimensions of the chart.
-  const width = 528;
-  const height = width;
-  const margin = 1; // to avoid clipping the root circle stroke
- // const name = d => d.id.split(".").pop(); // "Strings" of "flare.util.Strings"
- // const group = d => d.id.split(".")[1]; // "util" of "flare.util.Strings"
- // const names = d => name(d).split(/(?=[A-Z][a-z])|\s+/g); // ["Legend", "Item"] of "flare.vis.legend.LegendItems"
 
-  // Specify the number format for values.
-  const format = d3.format(",d");
 
-  // Create a categorical color scale.
-  const color = d3.scaleOrdinal(d3.schemeTableau10);
+function chartTwo(data, {
+  width = window.innerWidth/1.2, // outer width, in pixels
+  height = width/(1.5),
+  value = ([, y]) => y,
+  padding = 10, // padding between circles
+  margin = 1, // default margins
+  marginTop = 100, // top margin, in pixels
+  marginRight = margin, // right margin, in pixels
+  marginBottom = margin, // bottom margin, in pixels
+  marginLeft = margin,
+  background = background
+}){
 
-  // Create the pack layout.
-  const pack = d3.pack()
-      .size([width - margin * 2, height - margin * 2])
-      .padding(30);
+  document.querySelector('.chart').innerHTML = '';
 
-  // Compute the hierarchy from the (flat) data; expose the values
-  // for each node; lastly apply the pack layout.
-  const root = pack(d3.hierarchy(data)
-      .sum(d => d.value));
+  var diameter = width/2;
 
-  var showTooltip = function(d){
+  let myBackground = (background === 1) ? "bg-[url('./bg.png')] bg-cover" :'bg-none';
+  
+  var tooltip = d3.select("#bubble")
+  .append('div')
+  .style('opacity',1)
+   var showTooltip = function(d, title){
     tooltip
       .transition()
       .duration(200)
     tooltip
-      .style("opacity", 1)
-      .html("Country: " + d.target['__data__'].data.name)
-      .style("left", (d.x) - 150 + "px")
-      .style("top", (d.y) + 50 + "px")
+      .html("<span class='text-black'>" + title + "</span>\n\n" + "<span class='text-green-700'>Green</span>\n<span class='text-red-700'>Red</span>\n<span class='text-blue-700'>Blue</span>\n<span class='text-purple-700'>Purple</span>\n<span class='text-yellow-700'>Yellow</span>")
+      .style("display", "")
+      .style("left", (d.x) + "px")
+      .style("top", (d.y) + "px")
+      .attr("id", 'tooltip')
+      .attr("class", "tooltip bg-white p-2.5 border-2 border-black absolute w-[100px] text-[10px] z-40")
   }
 
   var moveTooltip = function(d) {
@@ -45,85 +49,58 @@ const chart = (data) => {
 
   var hideTooltip = function(d) {
     tooltip
-      .transition()
-      .duration(200)
-      .style("opacity", 0)
+      .style("display", 'none')
   }
-  // Create the SVG container.
-  const svg = d3.select("#bubble")
-  	.append('svg')
-      .attr("width", width)
-      .attr("height", height/1.2)
-      .attr("viewBox", [-margin, -margin, width, height])
-      .attr("style", "width: 100%; height:auto;")
-      .attr("text-anchor", "middle")
-
-  // Place each (leaf) node according to the layout’s x and y values.
-  const node = svg.append("g")
-    .selectAll("circle")
-    .data(root.descendants().slice(1)) 
-    .join("circle")
-      .attr("fill", d => d.children ? color(d.depth) : "grey")
-      .on('mouseover', showTooltip)
-      .on("mousemove", moveTooltip)
-      .on("mouseleave", hideTooltip)
-    
-  // Append the text labels.
-  const label = svg.append("g")
-      .style("font", "15px sans-serif")
-      .style('font-weight', "bold")
-      .attr("pointer-events", "none")
-      .attr("text-anchor", "middle")
-    .selectAll("text")
-    .data(root.descendants().slice(1))
-    .join("text")
-      .style("fill-opacity", d => d.parent === root ? 1 : 1)
-      .style("display", d => d.parent === root ? "inline" : "inline")
-      .text(d => d.data.name)
 
 
-  // // Create the zoom behavior and zoom immediately in to the initial focus node.
-  //svg.on("click", (event) => zoom(event, root));
-  let focus = root;
-  let view;
-  zoomTo([focus.x, focus.y, focus.r * 2]);
+  var svg = d3.select('.chart').append('svg')
+    .attr('width', diameter)
+    .attr('height', '100vh')
+    .attr('id', "bubbleChart")
+    .attr("class", myBackground + ' w-[100%] ' + 'max-[500px]:pb-[100px] text-[6px] mt-[0%] xs:text-[4px] sm:text-[6px] md:text-[12px] lg:text-[12px] ')
+    .attr("viewBox", [-marginLeft, -marginTop, width, height]);
 
-   function zoomTo(v) {
-     const k = width / v[2];
+  var bubble = d3.pack(data)
+            .size([diameter, diameter])
+            .padding(3);
 
-  //   view = v;
+  var nodes = d3.hierarchy(data)
+            .sum(function(d) { return d.value; });
 
-     label.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
-     node.attr("transform", d => `translate(${(d.x - v[0]) * k},${  (d.y - v[1]) * k})`);
-     node.attr("r", d => (d.r * k));
+  var color = 'blue';
 
-   }
+  change(data, bubble(nodes));
+
+  function change(data, nodes) {
+
+    // generate data with calculated layout values
+    var vis = svg.selectAll('circle')
+        .data(nodes)
+      .enter()
+        .insert("circle")
+        .attr('transform', d => 'translate(' + [d.x, d.y] + ')')
+        .attr('r', d => d.r)
+        .attr('name', d=> d.data.name)
+        .attr('class', 'stroke-[1px] opacity-[.8] fill-[#9DB4CC] hover:opacity-[1] hover:stroke-[4px] hover:stroke-red-700')
+        .attr('stroke', d=> {return 'black'})
+        .attr('display', d=> {return (d.parent === null) ? 'none' : ''})
+        .on('mouseover', d => showTooltip(d, d.target['__data__'].data.name))
+        .on("mousemove", moveTooltip)
+        .on("mouseleave", hideTooltip)
 
 
-  var tooltip = d3.select("#bubble")
-  .append('div')
-  .style('opacity',0)
-  .attr("class", "tooltip")
-  .style("background-color", "black")
-  .style("border-radius", "5px")
-  .style("padding", "10px")
-  .style("color", "white")
-
-
-  return [Object.assign(svg.node(), {scales: {color}}), root.descendants().slice(1)];
+    var texts = svg.selectAll(null)
+          .data(nodes)
+        .enter()
+        .append('text')
+        .attr('transform', d => 'translate(' + [d.x, d.y] + ')')
+        .attr('r', d => d.r)
+        .attr("dy", ".3em")
+        .style("text-anchor", "middle")
+        .attr("class", '')
+        .text(d => {return (d.parent === null || d.children) ? '' : (d.data.name + ' ' + d.data.value)});
+  };
 }
-
-// const data = {
-//   name: "Eve",
-//   value:50,
-//   children: [
-//     {name: "Cain", value:10},
-//     {name: "One", children: [{name: "Enos", value:10}, {name: "Noam", value:10}]},
-//     {name: "Abel", value:10},
-//     {name: "Two", children: [{name: "Enoch", value:10}, {name: "Aenoch", value:10}, {name: "Baenoch", value:10}]},
-//     {name: "Azura", value:10}
-//   ]
-// };
 
 class AppV1 extends Component {
 
@@ -131,22 +108,69 @@ class AppV1 extends Component {
 		super(props);
 		this.state = {
 			data: this.props.data,
-      version: this.props.version
+      version: this.props.version,
+      renderNum:0,
+      background:0,
 		}
+    this.changeBackground = this.changeBackground.bind(this);
 	}
 
+  changeBackground(){
+       if(document.getElementById('tooltip')){
+          document.getElementById('tooltip').remove();
+        }
+       if(document.querySelector('#bubbleChart').classList[0] === "bg-none"){
+
+        document.querySelector('#bubbleChart').classList.replace("bg-none", "bg-[url('./bg.png')]");
+       }else{
+         document.querySelector('#bubbleChart').classList.replace("bg-[url('./bg.png')]", "bg-none");
+       }
+
+       this.setState({
+        background: this.state.background === 1 ? 0: 1,
+       })
+  }
+
 	componentDidMount(){
-		const data1 = chart(this.state.data)[1];
+
+    chartTwo(this.props.data, {
+      value: d=> d.value,
+      background: this.state.background
+    });
+
 		this.setState({
-			data: data1
+			data: [],
+      renderNum: 1,
 		})
 	}
 
+
 	render(){
-	const myNewData = this.state.data;
+    if(document.getElementById('tooltip')){
+      document.getElementById('tooltip').remove();
+    }
+    
+  	const myNewData = this.state.data;
+    const versionClass = (this.state.version === 1) ?
+      'fixed left-[10%]':
+      (this.state.version === 2) ?
+      '':
+      '';
+      
+      if(this.state.renderNum > 0){
+
+        chartTwo(this.props.data, {
+        value: d=> d.value,
+        background: this.state.background
+      });
+    }
 	  return (
-	      <div id="bubble" className={this.state.version}>
+      <div>
+        <button onClick={this.changeBackground} className="hover:opacity-[.75] bg-[url('./icon.png')] w-[40px] h-[40px] bg-contain fixed top-[5%] left-[5%]"></button>
+	      <div class="chart"></div>
+        <div id="bubble">    
 	      </div>
+      </div>
 	  );
 	}
 }
